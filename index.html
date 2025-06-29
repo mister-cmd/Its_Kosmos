@@ -183,6 +183,8 @@
             position: relative;
             overflow: hidden;
             z-index: 1;
+            border: none;
+            cursor: pointer;
         }
 
         .cta-button::before {
@@ -219,6 +221,7 @@
             top: 10%;
             left: 10%;
             box-shadow: 0 0 50px rgba(77, 91, 206, 0.5);
+            animation: float 15s infinite ease-in-out;
         }
 
         .planet-2 {
@@ -228,6 +231,8 @@
             bottom: 15%;
             right: 15%;
             box-shadow: 0 0 40px rgba(108, 124, 224, 0.5);
+            animation: float 12s infinite ease-in-out;
+            animation-delay: 1s;
         }
 
         /* Sections */
@@ -471,6 +476,7 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 40px;
             margin-bottom: 40px;
+            text-align: left;
         }
 
         .footer-column h3 {
@@ -490,9 +496,57 @@
             background: var(--accent-light);
         }
 
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul li a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.3s;
+            position: relative;
+            display: inline-block;
+            padding: 3px 0;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--accent-light);
+        }
+
+        .footer-column ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent-light);
+            transition: width 0.3s;
+        }
+
+        .footer-column ul li a:hover::after {
+            width: 100%;
+        }
+
+        .footer-column p {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-column p i {
+            margin-right: 10px;
+            width: 20px;
+            color: var(--accent-light);
+        }
+
         .social-links {
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
             margin-top: 20px;
         }
 
@@ -504,7 +558,7 @@
             height: 45px;
             background: rgba(255, 255, 255, 0.07);
             border-radius: 50%;
-            margin: 0 10px;
+            margin: 0 10px 0 0;
             color: var(--text);
             font-size: 20px;
             transition: background 0.3s, transform 0.3s;
@@ -519,6 +573,36 @@
             padding-top: 30px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--text-secondary);
+        }
+
+        /* Form Messages */
+        .form-message {
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+        }
+
+        .form-message.success {
+            background: rgba(46, 204, 113, 0.2);
+            border: 1px solid #2ecc71;
+            color: #2ecc71;
+            display: block;
+        }
+
+        .form-message.error {
+            background: rgba(231, 76, 60, 0.2);
+            border: 1px solid #e74c3c;
+            color: #e74c3c;
+            display: block;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
         }
 
         /* Responsive Design */
@@ -580,6 +664,19 @@
             .hero p {
                 font-size: 1.2rem;
             }
+            
+            .footer-content {
+                text-align: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            .footer-column h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
         }
 
         @media (max-width: 480px) {
@@ -589,6 +686,15 @@
             
             .section-title {
                 font-size: 2rem;
+            }
+            
+            .footer-column {
+                text-align: center;
+            }
+            
+            .footer-column ul li a::after {
+                left: 50%;
+                transform: translateX(-50%);
             }
         }
     </style>
@@ -738,23 +844,24 @@
     <section class="contact" id="contact">
         <h2 class="section-title">Свяжитесь с Нами</h2>
         
-        <form class="contact-form">
+        <form class="contact-form" id="contactForm" action="https://formspree.io/f/mjvnerwq" method="POST">
             <div class="form-group">
                 <label for="name">Имя</label>
-                <input type="text" id="name" required>
+                <input type="text" id="name" name="name" required>
             </div>
             
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" required>
+                <input type="email" id="email" name="email" required>
             </div>
             
             <div class="form-group">
                 <label for="message">Сообщение</label>
-                <textarea id="message" required></textarea>
+                <textarea id="message" name="message" required></textarea>
             </div>
             
             <button type="submit" class="cta-button">Отправить</button>
+            <div class="form-message" id="formMessage"></div>
         </form>
     </section>
 
@@ -773,13 +880,14 @@
                     <li><a href="#features">Миссии</a></li>
                     <li><a href="#gallery">Галерея</a></li>
                     <li><a href="#timeline">История</a></li>
+                    <li><a href="#contact">Контакты</a></li>
                 </ul>
             </div>
             
             <div class="footer-column">
                 <h3>Контакты</h3>
                 <p><i class="fas fa-map-marker-alt"></i> Москва, Россия</p>
-                <p><i class="fas fa-envelope"></i> contact@spaceexplorer.com</p>
+                <p><i class="fas fa-envelope"></i> its.kosmos59@gmail.com</p>
                 <p><i class="fas fa-phone"></i> +7 (495) 123-4567</p>
                 
                 <div class="social-links">
@@ -889,7 +997,8 @@
 
         // Form submission handling
         function setupForm() {
-            const contactForm = document.querySelector('.contact-form');
+            const contactForm = document.getElementById('contactForm');
+            const formMessage = document.getElementById('formMessage');
             
             contactForm.addEventListener('submit', function(e) {
                 e.preventDefault();
@@ -901,11 +1010,33 @@
                 
                 // Simple validation
                 if (name && email && message) {
-                    // Here you would normally send the form data to a server
-                    alert('Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.');
-                    contactForm.reset();
+                    // Send form data to Formspree
+                    const formData = new FormData(this);
+                    
+                    fetch(this.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            // Success message
+                            formMessage.textContent = 'Сообщение успешно отправлено! Скоро мы с вами свяжемся.';
+                            formMessage.className = 'form-message success';
+                            contactForm.reset();
+                        } else {
+                            throw new Error('Ошибка при отправке сообщения');
+                        }
+                    })
+                    .catch(error => {
+                        formMessage.textContent = 'Произошла ошибка при отправке. Пожалуйста, попробуйте еще раз.';
+                        formMessage.className = 'form-message error';
+                    });
                 } else {
-                    alert('Пожалуйста, заполните все поля формы.');
+                    formMessage.textContent = 'Пожалуйста, заполните все поля формы.';
+                    formMessage.className = 'form-message error';
                 }
             });
         }
