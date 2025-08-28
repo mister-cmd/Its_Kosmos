@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Космические исследования | Изучайте Вселенную</title>
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Anime.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -47,6 +51,7 @@
             position: absolute;
             background-color: white;
             border-radius: 50%;
+            opacity: 0;
         }
 
         /* Header Styles */
@@ -125,6 +130,7 @@
             display: none;
             cursor: pointer;
             font-size: 24px;
+            color: var(--text);
         }
 
         /* Hero Section */
@@ -161,6 +167,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 0 0 20px rgba(108, 124, 224, 0.5);
+            opacity: 0;
         }
 
         .hero p {
@@ -168,6 +175,7 @@
             max-width: 700px;
             margin-bottom: 40px;
             color: var(--text-secondary);
+            opacity: 0;
         }
 
         .cta-button {
@@ -185,6 +193,7 @@
             z-index: 1;
             border: none;
             cursor: pointer;
+            opacity: 0;
         }
 
         .cta-button::before {
@@ -221,7 +230,6 @@
             top: 10%;
             left: 10%;
             box-shadow: 0 0 50px rgba(77, 91, 206, 0.5);
-            animation: float 15s infinite ease-in-out;
         }
 
         .planet-2 {
@@ -231,8 +239,15 @@
             bottom: 15%;
             right: 15%;
             box-shadow: 0 0 40px rgba(108, 124, 224, 0.5);
-            animation: float 12s infinite ease-in-out;
-            animation-delay: 1s;
+        }
+
+        .planet-3 {
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle at 30% 30%, #a0a0d0, #3a3a6a);
+            top: 20%;
+            right: 10%;
+            box-shadow: 0 0 30px rgba(108, 124, 224, 0.3);
         }
 
         /* Sections */
@@ -246,6 +261,7 @@
             text-align: center;
             margin-bottom: 70px;
             position: relative;
+            opacity: 0;
         }
 
         .section-title::after {
@@ -282,6 +298,7 @@
             transition: transform 0.3s, box-shadow 0.3s;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0;
         }
 
         .feature-card:hover {
@@ -294,11 +311,45 @@
             font-size: 50px;
             color: var(--accent-light);
             margin-bottom: 25px;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: rotate(360deg);
         }
 
         .feature-card h3 {
             font-size: 24px;
             margin-bottom: 15px;
+        }
+
+        /* Facts Section */
+        .facts {
+            background-color: var(--primary);
+            position: relative;
+        }
+
+        .facts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .fact-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0;
+        }
+
+        .fact-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--accent-light);
         }
 
         /* Gallery Section */
@@ -317,6 +368,7 @@
             cursor: pointer;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s;
+            opacity: 0;
         }
 
         .gallery-item:hover {
@@ -376,6 +428,7 @@
             position: relative;
             width: 50%;
             padding: 20px 40px;
+            opacity: 0;
         }
 
         .timeline-item:nth-child(odd) {
@@ -393,6 +446,11 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
+            transition: transform 0.3s;
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.05);
         }
 
         .timeline-content::after {
@@ -429,6 +487,7 @@
             padding: 40px;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0;
         }
 
         .form-group {
@@ -562,6 +621,7 @@
             color: var(--text);
             font-size: 20px;
             transition: background 0.3s, transform 0.3s;
+            opacity: 0;
         }
 
         .social-links a:hover {
@@ -600,9 +660,9 @@
 
         /* Animations */
         @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
+            0% { transform: translateY(0px) translateX(0px); }
+            50% { transform: translateY(-20px) translateX(10px); }
+            100% { transform: translateY(0px) translateX(0px); }
         }
 
         /* Responsive Design */
@@ -718,6 +778,7 @@
             <ul id="navMenu">
                 <li><a href="#home">Главная</a></li>
                 <li><a href="#features">Миссии</a></li>
+                <li><a href="#facts">Факты</a></li>
                 <li><a href="#gallery">Галерея</a></li>
                 <li><a href="#timeline">История</a></li>
                 <li><a href="#contact">Контакты</a></li>
@@ -729,9 +790,10 @@
     <section class="hero" id="home">
         <div class="planet planet-1"></div>
         <div class="planet planet-2"></div>
+        <div class="planet planet-3"></div>
         
         <h1>Исследуйте Вселенную</h1>
-        <p>Откройте для себя тайны космоса и последние достижения в области астрономии и космических исследований</p>
+        <p>Погрузитесь в тайны космоса, узнайте о новейших открытиях и станьте частью великого космического путешествия!</p>
         <a href="#features" class="cta-button">Начать исследование</a>
     </section>
 
@@ -745,7 +807,7 @@
                     <i class="fas fa-satellite"></i>
                 </div>
                 <h3>Исследование Марса</h3>
-                <p>Изучение марсианской поверхности и поиск признаков жизни на Красной планете.</p>
+                <p>Изучение марсианской поверхности, анализ грунта и поиск следов древней жизни на Красной планете.</p>
             </div>
             
             <div class="feature-card">
@@ -753,7 +815,7 @@
                     <i class="fas fa-moon"></i>
                 </div>
                 <h3>Лунная База</h3>
-                <p>Создание постоянной обитаемой базы на Луне для научных исследований.</p>
+                <p>Создание устойчивой инфраструктуры на Луне для научных экспериментов и добычи ресурсов.</p>
             </div>
             
             <div class="feature-card">
@@ -761,7 +823,50 @@
                     <i class="fas fa-user-astronaut"></i>
                 </div>
                 <h3>Космический Туризм</h3>
-                <p>Предоставление возможности для всех желающих увидеть Землю из космоса.</p>
+                <p>Доступные полёты в космос для всех, кто мечтает увидеть Землю с орбиты.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h3>Межзвёздные зонды</h3>
+                <p>Запуск автономных зондов для исследования дальних звёздных систем и поиска экзопланет.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <h3>Климатические спутники</h3>
+                <p>Мониторинг Земли с орбиты для изучения изменений климата и защиты окружающей среды.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Facts Section -->
+    <section class="facts" id="facts">
+        <h2 class="section-title">Факты о Космосе</h2>
+        
+        <div class="facts-container">
+            <div class="fact-card">
+                <h3>Возраст Вселенной</h3>
+                <p>Вселенной около 13,8 миллиардов лет, и она продолжает расширяться с ускорением.</p>
+            </div>
+            
+            <div class="fact-card">
+                <h3>Количество звёзд</h3>
+                <p>В нашей галактике Млечный Путь около 200 миллиардов звёзд, и это только одна из триллионов галактик!</p>
+            </div>
+            
+            <div class="fact-card">
+                <h3>Чёрные дыры</h3>
+                <p>Чёрные дыры настолько плотные, что даже свет не может покинуть их гравитационное поле.</p>
+            </div>
+            
+            <div class="fact-card">
+                <h3>Космическая пыль</h3>
+                <p>Космическая пыль состоит из крошечных частиц, которые могут формировать новые звёзды и планеты.</p>
             </div>
         </div>
     </section>
@@ -775,6 +880,7 @@
                 <img src="https://images.unsplash.com/photo-1464802686167-b939a6910659?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Галактика">
                 <div class="gallery-overlay">
                     <h3>Туманность Ориона</h3>
+                    <p>Одна из самых ярких туманностей, видимых с Земли.</p>
                 </div>
             </div>
             
@@ -782,6 +888,7 @@
                 <img src="https://images.unsplash.com/photo-1454789548928-9efd52dc4031?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Планета">
                 <div class="gallery-overlay">
                     <h3>Планета Юпитер</h3>
+                    <p>Газовый гигант с мощными бурями и десятками спутников.</p>
                 </div>
             </div>
             
@@ -789,6 +896,7 @@
                 <img src="https://images.unsplash.com/photo-1505506874110-6a7a69069a08?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Космический корабль">
                 <div class="gallery-overlay">
                     <h3>Международная Космическая Станция</h3>
+                    <p>Орбитальная лаборатория для международных исследований.</p>
                 </div>
             </div>
             
@@ -796,6 +904,23 @@
                 <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Галактика">
                 <div class="gallery-overlay">
                     <h3>Галактика Андромеды</h3>
+                    <p>Ближайшая к нам спиральная галактика, видимая невооружённым глазом.</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Космос">
+                <div class="gallery-overlay">
+                    <h3>Кольца Сатурна</h3>
+                    <p>Уникальная система колец из льда и пыли.</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1447433693259-c8549e352d5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Звёзды">
+                <div class="gallery-overlay">
+                    <h3>Звёздное скопление</h3>
+                    <p>Тысячи звёзд, связанных гравитацией в одном кластере.</p>
                 </div>
             </div>
         </div>
@@ -810,7 +935,7 @@
                 <div class="timeline-content">
                     <div class="timeline-year">1957</div>
                     <h3>Первый спутник</h3>
-                    <p>Запуск первого искусственного спутника Земли "Спутник-1" Советским Союзом.</p>
+                    <p>Запуск "Спутника-1" Советским Союзом положил начало космической эре.</p>
                 </div>
             </div>
             
@@ -818,7 +943,7 @@
                 <div class="timeline-content">
                     <div class="timeline-year">1961</div>
                     <h3>Первый человек в космосе</h3>
-                    <p>Юрий Гагарин стал первым человеком, совершившим орбитальный полет вокруг Земли.</p>
+                    <p>Юрий Гагарин совершил первый орбитальный полёт на корабле "Восток-1".</p>
                 </div>
             </div>
             
@@ -826,7 +951,23 @@
                 <div class="timeline-content">
                     <div class="timeline-year">1969</div>
                     <h3>Высадка на Луну</h3>
-                    <p>Американские астронавты Нил Армстронг и Базз Олдрин высадились на поверхность Луны.</p>
+                    <p>Нил Армстронг и Базз Олдрин стали первыми людьми на Луне (миссия "Аполлон-11").</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">1990</div>
+                    <h3>Телескоп Хаббла</h3>
+                    <p>Запуск космического телескопа "Хаббл", открывшего новые горизонты в астрономии.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2004</div>
+                    <h3>Марсоходы</h3>
+                    <p>Марсоходы "Спирит" и "Оппортьюнити" начали исследование поверхности Марса.</p>
                 </div>
             </div>
             
@@ -834,7 +975,15 @@
                 <div class="timeline-content">
                     <div class="timeline-year">2020</div>
                     <h3>Коммерческие полеты</h3>
-                    <p>SpaceX осуществила первый пилотируемый коммерческий космический полет.</p>
+                    <p>SpaceX осуществила первый пилотируемый коммерческий полёт на Crew Dragon.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2024</div>
+                    <h3>Миссия Artemis</h3>
+                    <p>NASA запустила миссию Artemis для возвращения человека на Луну.</p>
                 </div>
             </div>
         </div>
@@ -856,6 +1005,11 @@
             </div>
             
             <div class="form-group">
+                <label for="subject">Тема</label>
+                <input type="text" id="subject" name="subject">
+            </div>
+            
+            <div class="form-group">
                 <label for="message">Сообщение</label>
                 <textarea id="message" name="message" required></textarea>
             </div>
@@ -870,7 +1024,7 @@
         <div class="footer-content">
             <div class="footer-column">
                 <h3>SpaceExplorer</h3>
-                <p>Исследование космоса для будущего человечества. Присоединяйтесь к нам в этом увлекательном путешествии!</p>
+                <p>Мы вдохновляем новое поколение исследователей космоса, открывая двери к звёздам и новым горизонтам.</p>
             </div>
             
             <div class="footer-column">
@@ -878,6 +1032,7 @@
                 <ul>
                     <li><a href="#home">Главная</a></li>
                     <li><a href="#features">Миссии</a></li>
+                    <li><a href="#facts">Факты</a></li>
                     <li><a href="#gallery">Галерея</a></li>
                     <li><a href="#timeline">История</a></li>
                     <li><a href="#contact">Контакты</a></li>
@@ -895,6 +1050,7 @@
                     <a href="#"><i class="fab fa-twitter"></i></a>
                     <a href="#"><i class="fab fa-instagram"></i></a>
                     <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
                 </div>
             </div>
         </div>
@@ -905,10 +1061,313 @@
     </footer>
 
     <script>
+        // Anime.js Animations
+        document.addEventListener('DOMContentLoaded', () => {
+            // Hero Section Animations
+            anime.timeline({
+                easing: 'easeOutExpo'
+            })
+            .add({
+                targets: '.hero h1',
+                opacity: [0, 1],
+                translateY: [-50, 0],
+                duration: 1200,
+                letterSpacing: ['0px', '3px']
+            })
+            .add({
+                targets: '.hero p',
+                opacity: [0, 1],
+                translateY: [50, 0],
+                duration: 1200
+            }, '-=800')
+            .add({
+                targets: '.cta-button',
+                opacity: [0, 1],
+                scale: [0.8, 1],
+                duration: 1000,
+                easing: 'easeOutElastic(1, .6)'
+            }, '-=800');
+
+            // Planet Parallax Animation
+            anime({
+                targets: '.planet-1',
+                translateX: () => anime.random(-20, 20),
+                translateY: () => anime.random(-20, 20),
+                rotate: [0, 360],
+                duration: 6000,
+                direction: 'alternate',
+                loop: true,
+                easing: 'easeInOutSine'
+            });
+
+            anime({
+                targets: '.planet-2',
+                translateX: () => anime.random(-15, 15),
+                translateY: () => anime.random(-15, 15),
+                rotate: [360, 0],
+                duration: 5000,
+                direction: 'alternate',
+                loop: true,
+                easing: 'easeInOutSine',
+                delay: 1000
+            });
+
+            anime({
+                targets: '.planet-3',
+                translateX: () => anime.random(-10, 10),
+                translateY: () => anime.random(-10, 10),
+                scale: [0.9, 1.1],
+                duration: 4000,
+                direction: 'alternate',
+                loop: true,
+                easing: 'easeInOutSine',
+                delay: 1500
+            });
+
+            // Stars Animation
+            anime({
+                targets: '.star',
+                opacity: [0, 1],
+                scale: [0.5, 1],
+                duration: 2000,
+                delay: anime.stagger(10),
+                easing: 'easeInOutQuad'
+            });
+
+            // Section Title Animations
+            const sectionTitles = document.querySelectorAll('.section-title');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        anime({
+                            targets: entry.target,
+                            opacity: [0, 1],
+                            translateY: [50, 0],
+                            scale: [0.9, 1],
+                            duration: 1000,
+                            easing: 'easeOutExpo'
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            sectionTitles.forEach(title => observer.observe(title));
+
+            // Feature Cards Animation
+            const featureCards = document.querySelectorAll('.feature-card');
+            const cardObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        anime({
+                            targets: entry.target,
+                            opacity: [0, 1],
+                            translateY: [100, 0],
+                            scale: [0.9, 1],
+                            duration: 1000,
+                            easing: 'easeOutExpo',
+                            delay: anime.stagger(200)
+                        });
+                        cardObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            featureCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    anime({
+                        targets: card.querySelector('.feature-icon'),
+                        rotate: 360,
+                        duration: 600,
+                        easing: 'easeInOutQuad'
+                    });
+                });
+                cardObserver.observe(card);
+            });
+
+            // Facts Cards Animation
+            const factCards = document.querySelectorAll('.fact-card');
+            const factObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        anime({
+                            targets: entry.target,
+                            opacity: [0, 1],
+                            translateY: [100, 0],
+                            scale: [0.9, 1],
+                            duration: 1000,
+                            easing: 'easeOutExpo',
+                            delay: anime.stagger(200)
+                        });
+                        factObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            factCards.forEach(card => factObserver.observe(card));
+
+            // Gallery Items Animation
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const galleryObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        anime({
+                            targets: entry.target,
+                            opacity: [0, 1],
+                            scale: [0.8, 1],
+                            duration: 1000,
+                            easing: 'easeOutExpo',
+                            delay: anime.stagger(200)
+                        });
+                        galleryObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            galleryItems.forEach(item => {
+                item.addEventListener('mouseenter', () => {
+                    anime({
+                        targets: item.querySelector('img'),
+                        scale: 1.1,
+                        duration: 500,
+                        easing: 'easeOutQuad'
+                    });
+                    anime({
+                        targets: item.querySelector('.gallery-overlay'),
+                        translateY: [50, 0],
+                        duration: 300,
+                        easing: 'easeOutQuad'
+                    });
+                });
+                item.addEventListener('mouseleave', () => {
+                    anime({
+                        targets: item.querySelector('img'),
+                        scale: 1,
+                        duration: 500,
+                        easing: 'easeOutQuad'
+                    });
+                    anime({
+                        targets: item.querySelector('.gallery-overlay'),
+                        translateY: 50,
+                        duration: 300,
+                        easing: 'easeOutQuad'
+                    });
+                });
+                galleryObserver.observe(item);
+            });
+
+            // Timeline Items Animation
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            const timelineObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        anime({
+                            targets: entry.target,
+                            opacity: [0, 1],
+                            translateX: entry.target.classList.contains('even') ? [100, 0] : [-100, 0],
+                            scale: [0.95, 1],
+                            duration: 1000,
+                            easing: 'easeOutExpo'
+                        });
+                        timelineObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            timelineItems.forEach((item, index) => {
+                item.classList.add(index % 2 === 0 ? 'odd' : 'even');
+                item.addEventListener('mouseenter', () => {
+                    anime({
+                        targets: item.querySelector('.timeline-content'),
+                        scale: 1.05,
+                        duration: 300,
+                        easing: 'easeOutQuad'
+                    });
+                });
+                item.addEventListener('mouseleave', () => {
+                    anime({
+                        targets: item.querySelector('.timeline-content'),
+                        scale: 1,
+                        duration: 300,
+                        easing: 'easeOutQuad'
+                    });
+                });
+                timelineObserver.observe(item);
+            });
+
+            // Contact Form Animation
+            const contactForm = document.querySelector('.contact-form');
+            const formObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        anime({
+                            targets: entry.target,
+                            opacity: [0, 1],
+                            translateY: [100, 0],
+                            duration: 1000,
+                            easing: 'easeOutExpo'
+                        });
+                        formObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            formObserver.observe(contactForm);
+
+            // Social Links Animation
+            const socialLinks = document.querySelectorAll('.social-links a');
+            const socialObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        anime({
+                            targets: entry.target,
+                            opacity: [0, 1],
+                            translateY: [50, 0],
+                            rotate: [0, 360],
+                            duration: 1000,
+                            easing: 'easeOutExpo',
+                            delay: anime.stagger(100)
+                        });
+                        socialObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            socialLinks.forEach(link => socialObserver.observe(link));
+
+            // CTA Button Click Animation
+            document.querySelectorAll('.cta-button').forEach(button => {
+                button.addEventListener('mouseenter', () => {
+                    anime({
+                        targets: button,
+                        scale: 1.1,
+                        duration: 300,
+                        easing: 'easeOutQuad'
+                    });
+                });
+                button.addEventListener('mouseleave', () => {
+                    anime({
+                        targets: button,
+                        scale: 1,
+                        duration: 300,
+                        easing: 'easeOutQuad'
+                    });
+                });
+                button.addEventListener('click', () => {
+                    anime({
+                        targets: button,
+                        scale: [1, 1.2, 1],
+                        duration: 300,
+                        easing: 'easeInOutQuad'
+                    });
+                });
+            });
+        });
+
         // Create stars for background
         function createStars() {
             const starsContainer = document.getElementById('stars');
-            const starCount = 200;
+            const starCount = 300; // Increased star count
             
             for (let i = 0; i < starCount; i++) {
                 const star = document.createElement('div');
@@ -921,17 +1380,9 @@
                 star.style.top = `${y}%`;
                 
                 // Random size
-                const size = Math.random() * 3;
+                const size = Math.random() * 4;
                 star.style.width = `${size}px`;
                 star.style.height = `${size}px`;
-                
-                // Random opacity
-                const opacity = Math.random();
-                star.style.opacity = opacity;
-                
-                // Random animation
-                const duration = 2 + Math.random() * 10;
-                star.style.animation = `twinkle ${duration}s infinite alternate`;
                 
                 starsContainer.appendChild(star);
             }
@@ -942,6 +1393,12 @@
             const header = document.getElementById('header');
             if (window.scrollY > 100) {
                 header.classList.add('scrolled');
+                anime({
+                    targets: '.logo, nav ul li a',
+                    opacity: [0.7, 1],
+                    duration: 500,
+                    easing: 'easeOutQuad'
+                });
             } else {
                 header.classList.remove('scrolled');
             }
@@ -977,20 +1434,13 @@
             
             menuToggle.addEventListener('click', () => {
                 navMenu.classList.toggle('active');
-            });
-        }
-
-        // Feature card animations
-        function setupFeatureAnimations() {
-            const featureCards = document.querySelectorAll('.feature-card');
-            
-            featureCards.forEach(card => {
-                card.addEventListener('mouseenter', () => {
-                    card.style.transform = 'translateY(-15px)';
-                });
-                
-                card.addEventListener('mouseleave', () => {
-                    card.style.transform = 'translateY(0)';
+                anime({
+                    targets: '#navMenu li',
+                    translateY: [50, 0],
+                    opacity: [0, 1],
+                    duration: 800,
+                    delay: anime.stagger(100),
+                    easing: 'easeOutExpo'
                 });
             });
         }
@@ -1000,12 +1450,24 @@
             const contactForm = document.getElementById('contactForm');
             const formMessage = document.getElementById('formMessage');
             
+            contactForm.addEventListener('click', (e) => {
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+                    anime({
+                        targets: e.target,
+                        scale: [1, 1.05, 1],
+                        duration: 300,
+                        easing: 'easeInOutQuad'
+                    });
+                }
+            });
+
             contactForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
                 // Get form data
                 const name = document.getElementById('name').value;
                 const email = document.getElementById('email').value;
+                const subject = document.getElementById('subject').value;
                 const message = document.getElementById('message').value;
                 
                 // Simple validation
@@ -1026,6 +1488,13 @@
                             formMessage.textContent = 'Сообщение успешно отправлено! Скоро мы с вами свяжемся.';
                             formMessage.className = 'form-message success';
                             contactForm.reset();
+                            anime({
+                                targets: '.form-message.success',
+                                opacity: [0, 1],
+                                translateY: [20, 0],
+                                duration: 800,
+                                easing: 'easeOutExpo'
+                            });
                         } else {
                             throw new Error('Ошибка при отправке сообщения');
                         }
@@ -1033,38 +1502,49 @@
                     .catch(error => {
                         formMessage.textContent = 'Произошла ошибка при отправке. Пожалуйста, попробуйте еще раз.';
                         formMessage.className = 'form-message error';
+                        anime({
+                            targets: '.form-message.error',
+                            opacity: [0, 1],
+                            translateY: [20, 0],
+                            duration: 800,
+                            easing: 'easeOutExpo'
+                        });
                     });
                 } else {
-                    formMessage.textContent = 'Пожалуйста, заполните все поля формы.';
+                    formMessage.textContent = 'Пожалуйста, заполните все обязательные поля формы.';
                     formMessage.className = 'form-message error';
+                    anime({
+                        targets: '.form-message.error',
+                        opacity: [0, 1],
+                        translateY: [20, 0],
+                        duration: 800,
+                        easing: 'easeOutExpo'
+                    });
                 }
             });
         }
 
-        // Initialize everything when DOM is loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            createStars();
-            setupSmoothScrolling();
-            setupMobileMenu();
-            setupFeatureAnimations();
-            setupForm();
-            
-            // Initial header state
-            handleHeaderScroll();
-            
-            // Listen for scroll events
-            window.addEventListener('scroll', handleHeaderScroll);
-            
-            // Add CSS for star twinkle animation
-            const style = document.createElement('style');
-            style.innerHTML = `
-                @keyframes twinkle {
-                    0% { opacity: 0.2; }
-                    100% { opacity: 1; }
-                }
-            `;
-            document.head.appendChild(style);
-        });
+        // Initialize everything
+        createStars();
+        setupSmoothScrolling();
+        setupMobileMenu();
+        setupForm();
+        
+        // Initial header state
+        handleHeaderScroll();
+        
+        // Listen for scroll events
+        window.addEventListener('scroll', handleHeaderScroll);
+        
+        // Add CSS for star twinkle animation
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes twinkle {
+                0% { opacity: 0.2; }
+                100% { opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
